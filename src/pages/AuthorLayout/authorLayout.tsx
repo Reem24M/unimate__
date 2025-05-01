@@ -1,0 +1,29 @@
+import { Outlet, useLocation } from 'react-router-dom';
+import SideBar from '../../components/SideBar/sideBar';
+
+const AuthorLayout = () => {
+  const location = useLocation();
+
+  // Define routes where the sidebar should be hidden
+  const hideSidebarRoutes = ['/auther/editprofile','/auther/help'];
+
+  const shouldHideSidebar = hideSidebarRoutes.includes(location.pathname);
+    // console.log(shouldHideSidebar) 
+    // console.log(location.pathname)
+  return (
+    <div className=" flex justify-end Page min-h-screen">
+      <main className="content w-full h-full">
+        <Outlet />
+      </main>
+
+      {/* Show sidebar only if not in hidden list */}
+      {!shouldHideSidebar && (
+        <aside className=" min-h-full bg-[#f4f4f4] w-[250px]">
+          <SideBar />
+        </aside>
+      )}
+    </div>
+  );
+};
+
+export default AuthorLayout;
